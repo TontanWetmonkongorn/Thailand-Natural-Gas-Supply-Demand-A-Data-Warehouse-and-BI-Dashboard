@@ -1,0 +1,15 @@
+# Data preparation and spreadsheet / columnar file support
+numpy>=2.3,<3
+pandas>=2.3,<4
+pyarrow>=22,<25
+openpyxl>=3.1,<4
+# Embedded analytical SQL and relational database access
+duckdb>=1.4,<2
+SQLAlchemy>=2.0,<3
+# Visualization and notebooks
+matplotlib>=3.10,<4
+seaborn>=0.13,<1
+jupyterlab>=4.4,<5
+ipykernel>=7,<8
+nbconvert>=7.16,<8
+nbformat>=5.10,<6

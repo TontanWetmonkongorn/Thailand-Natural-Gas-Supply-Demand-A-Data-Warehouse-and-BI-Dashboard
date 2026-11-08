@@ -1,0 +1,23 @@
+# Local Python environments and caches
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+.pytest_cache/
+.ruff_cache/
+
+# Source data, generated datasets, databases, and exports
+data/
+outputs/
+reports/generated/
+*.duckdb
+*.duckdb.wal
+*.db
+*.sqlite
+*.sqlite3
+
+# Local credentials
+.env
+.env.*
+!.env.example
