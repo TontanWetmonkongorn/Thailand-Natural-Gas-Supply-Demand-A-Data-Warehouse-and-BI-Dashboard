@@ -1,6 +1,13 @@
-# Retail Performance & Demand Planning
+# Thailand Natural Gas Supply & Demand: A Data Warehouse and BI Dashboard
 
-Python, SQL, and Jupyter workspace for exploring retail sales and preparing demand plans.
+An independent portfolio project for a PTT data analyst internship, using official public Thai energy statistics. It is not an official PTT product.
+
+The project is currently in requirements and source assessment. The proposed first scope is monthly national supply trends, import dependence, and consumption by sector for 2015–2025, with an optional partial-year extension through July 2026. No warehouse pipeline or dashboard has been built yet.
+
+- [Business requirements, KPI definitions, and acceptance criteria](docs/business_requirements.md)
+- [Verified sources, observed coverage, and feasibility recommendation](docs/source_assessment.md)
+
+The Python, SQL, and Jupyter environment is ready for source exploration and the later warehouse and dashboard work.
 
 ## Setup
 
@@ -28,15 +35,14 @@ Use pandas and NumPy for preparation, DuckDB for SQL directly over dataframes, C
 
 ## Data and outputs
 
-Keep local inputs under `data/raw/`, prepared data under `data/processed/`, and exports under `outputs/`. These directories, local databases, notebook checkpoints, credentials, and `.venv/` are ignored by Git. Create the directories as needed; do not commit sensitive retail data or notebook outputs containing it.
+Keep local inputs under `data/raw/`, prepared data under `data/processed/`, and exports under `outputs/`. These directories, local databases, notebook checkpoints, credentials, and virtual environments are ignored by Git. Source-assessment downloads are local only, under `data/raw/source_assessment/`. Do not commit raw downloads or notebook outputs containing source data. Never add LNG tonnes to gas volume; see the unit rules in the business requirements.
 
 ## Verify the installation
 
 ```bash
 source .venv/bin/activate
 python -m pip check
-python scripts/verify_environment.py
 python -m jupyterlab --version
 ```
 
-The verification script exercises dataframe SQL, SQLite through SQLAlchemy, Excel and Parquet round trips, plotting, and notebook execution using temporary synthetic data. It leaves no datasets in the repository.
+These commands check dependency compatibility and confirm that JupyterLab is installed. They do not validate source data or run a pipeline.
