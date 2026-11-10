@@ -2,10 +2,13 @@
 
 An independent portfolio project for a PTT data analyst internship, using official public Thai energy statistics. It is not an official PTT product.
 
-The project is currently in requirements and source assessment. The proposed first scope is monthly national supply trends, import dependence, and consumption by sector for 2015–2025, with an optional partial-year extension through July 2026. No warehouse pipeline or dashboard has been built yet.
+The project is currently in requirements and source assessment. The first-release scope is monthly national supply trends, import dependence, and consumption by sector from January 2015 through December 2025 (132 months), using EPPO data. EPPO import-share data supports validation. Partial-year 2026 reporting and DMF integration are deferred to later releases. No warehouse pipeline or dashboard has been built yet.
 
 - [Business requirements, KPI definitions, and acceptance criteria](docs/business_requirements.md)
 - [Verified sources, observed coverage, and feasibility recommendation](docs/source_assessment.md)
+- [Cleaning rules, quality decisions, and validation tolerances](docs/data_quality_rules.md)
+- [Warehouse design explained in small steps](docs/warehouse_design.md)
+- [Progress, verification evidence, unresolved questions, and next step](docs/PROGRESS.md)
 
 The Python, SQL, and Jupyter environment is ready for source exploration and the later warehouse and dashboard work.
 

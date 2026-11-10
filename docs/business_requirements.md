@@ -1,10 +1,12 @@
 # Thailand Natural Gas Supply & Demand: A Data Warehouse and BI Dashboard
 
-Status: proposed requirements, assessed 10 November 2026 (Asia/Bangkok). This is an independent internship portfolio project, not an official PTT publication. The repository is named Thailand-Natural-Gas-Supply-Demand-A-Data-Warehouse-and-BI-Dashboard; the existing Python setup is retained.
+Status: requirements in development, initially assessed 10 November 2026; source-classification evidence and first-release scope updated 11 November 2026 (Asia/Bangkok). The reporting scope below is selected; implementation and acceptance checks remain pending. This is an independent internship portfolio project, not an official PTT publication. The repository is named Thailand-Natural-Gas-Supply-Demand-A-Data-Warehouse-and-BI-Dashboard; the existing Python setup is retained.
 
 ## Purpose and users
 
 Help an analyst explain how Thailand's reported gas supply mix and sector consumption change over time. The intended reader is a business reviewer who needs understandable monthly trends and traceable numbers, rather than operational dispatch or procurement advice. The evidence and access limitations are in [source assessment](source_assessment.md).
+
+The [cleaning and validation rules](data_quality_rules.md) define how a later implementation must preserve source evidence, handle missing/duplicate records, and assess reconciliation differences. These rules are documented, not implemented validation results.
 
 ## Business questions
 
@@ -18,11 +20,24 @@ Help an analyst explain how Thailand's reported gas supply mix and sector consum
 | Do supply and consumption move together? | Side-by-side monthly trends | Do not describe their difference as a physical gas balance or unmet demand. |
 | How reliable and current are the numbers? | Source, latest observation month, missing periods, and validation flags | A catalogue update date is not a data observation date. |
 
-## Feasible first release
+## Selected first-release scope
 
-Use EPPO supply and sector-consumption CSVs as the core; use EPPO import shares as a validation reference. Start with January 2015–December 2025: all 132 months occur in both core downloads and each month has all four sectors. January–July 2026 is an optional, separately labelled partial year, not a full-year comparison. These are observed file limits as of the assessment, not a promise of future publication.
+Decision recorded 11 November 2026: report **January 2015–December 2025**, at a national, monthly grain. Use the retained EPPO supply and sector-consumption CSVs as the core and EPPO import shares as a validation reference. All 132 reporting months occur in each file; consumption has all four sectors in every reporting month. Eleven complete calendar years allow like-for-like annual comparisons without presenting an incomplete 2026 as a complete year.
 
-Use DMF domestic supply only as a separate comparison series after reviewing definitions. Defer DMF field/block production integration: its units, naming changes, and duplicate candidate keys require investigation. Do not add DMF supply to EPPO supply: these describe overlapping activity.
+| Scope item | First-release decision |
+| --- | --- |
+| Reporting window | 2015-01 through 2025-12 inclusive; 132 months |
+| Geography | Thailand's nationally reported gas supply system and sector consumption; no provincial or company-level claims |
+| Supply | EPPO source-level series, domestic/import grouping, and total reported supply; preserve JDA and OTHERS as visible source categories |
+| Consumption | ELECTRICITY, GSP, INDUSTRY, NGV; retain the qualification that this is reported sector consumption, not all final demand |
+| Import-share reference | EPPO LNG/MYANMAR percentages for validation, not additional supply observations |
+| Measures | Reported MMSCFD, shares, monthly and annual trends, MoM and YoY changes, subject to the unit and acceptance rules below |
+| Comparison history | Retain 2014 only as supporting history for 2015 YoY calculations; do not display it as part of the reporting window. If a required component is unavailable, show its comparison as unavailable. |
+| Data vintage | Retain the previously assessed CSV snapshots and their documented hashes; use the 11 November workbooks as classification/reconciliation references, without silently replacing CSV values |
+| 2026 observations | Outside the first release. Preserve raw observations; any later partial-year release needs an explicit scope update and like-for-like YTD comparisons. |
+| DMF datasets | Reference evidence only in this release; no DMF series or field/block integration in the first dashboard |
+
+DMF domestic supply may become a separate comparison series in a later release after definition review. DMF field/block production additionally needs investigation of units, naming changes, and duplicate candidate keys. Do not add DMF supply to EPPO supply: these describe overlapping activity. Retain all raw source files; selecting a reporting window does not authorise deleting out-of-window records.
 
 Deferred: forecasting, prices and costs, carbon estimates, terminal utilisation, cargo-level LNG analysis, province-level demand, confidential PTT information, full ETL, warehouse implementation, and dashboard construction. The work now is documentation and feasibility only.
 
@@ -35,7 +50,7 @@ Deferred: forecasting, prices and costs, carbon estimates, terminal utilisation,
 | Supply | One month × EPPO source × unit, for Thailand's reported supply system | Month, source, unit; reported average daily rate |
 | Consumption | One month × EPPO sector × unit | Month, sector, unit; reported average daily rate |
 | Import-share reference | One month × import category | Month, category; publisher's percentage |
-| DMF comparison, optional | One month × reported area type × unit | Month, area, unit; a separate reported rate |
+| DMF comparison, future release only | One month × reported area type × unit | Month, area, unit; a separate reported rate, outside the first-release scope |
 
 Preserve source URL, resource ID, retrieval timestamp, file SHA-256, original unit, and any revision label with each source snapshot. Proposed lookup dimensions are month, source, sector, and provenance. These are design notes, not an implemented schema. Aggregate each fact to month before comparing facts: joining raw supply rows to raw sector rows would multiply values.
 
@@ -43,19 +58,21 @@ Preserve source URL, resource ID, retrieval timestamp, file SHA-256, original un
 
 - MMSCFD means million standard cubic feet per day: a **rate**, not a month's total volume. The EPPO CSVs explicitly label every inspected row `MMSCFD`.
 - EPPO's `LNG` row already uses gas volume. Retain it as “LNG, as reported by EPPO (MMSCFD)”; do not claim to have measured LNG cargo mass or performed a conversion.
-- Proposed pipeline-import mapping: `YADANA`, `YETAKUN`, `ZAWTIKA`; LNG-import mapping: `LNG`. This mapping reproduces the separate published LNG import-mix percentages within 0.1 percentage point over the selected period. Record it as a project mapping, not a supplied classification column.
-- Retain `JDA` as its own joint-development source category. Include it once in total reported supply. Do not silently label it a sovereign domestic field or an import. Keep `OTHERS` visible as an aggregated source; seek EPPO's category notes before publishing a definitive domestic-only measure. Unknown new source names must trigger review.
+- Verified import grouping: `YADANA`, `YETAKUN`, `ZAWTIKA`, and `LNG` sit under Import in EPPO's statistical workbooks. The project maps the first three to Myanmar pipeline imports. This mapping also reproduces the separate published LNG import-mix percentages within 0.1 percentage point over the selected period. Keep the mapping explicit because the CSV has no classification column. See the [source-definition follow-up](source_assessment.md#step-1-follow-up-source-definitions-11-november-2026) for workbook URLs, sheets, and cells.
+- EPPO's workbooks place `JDA` and `OTHERS` under Domestic Production. Label the aggregate “Domestic supply—EPPO classification, including JDA”. Preserve JDA as a distinct joint-development subcategory; do not claim exclusive Thai sovereignty or adjust its reported quantity for ownership shares. Label OTHERS “Other domestic sources—EPPO aggregate”; its individual-field composition remains unknown. Include both once in total supply. Unknown new source names must trigger review rather than default to domestic.
+- The workbook notes specify Myanmar gas at 1,000 BTU/SCF. Retain that qualification for EPPO's published series; do not silently apply a new conversion or assume cross-agency measurement equivalence.
 - Electricity = `ELECTRICITY`; gas separation plants = `GSP`; industry = `INDUSTRY`; natural gas for vehicles = `NGV`. Call their sum “reported sector consumption”, a demand proxy rather than all possible final demand.
 - Do not combine LNG tonnes, NGL, LPG, condensate barrels, oil-equivalent production, and natural-gas volume. DMF's Thai liquid-product labels must not be assumed to mean LNG.
 - Any later mass-to-volume conversion needs an authoritative factor, composition/density or heating-value assumptions, standard pressure/temperature basis, formula, units, applicable dates, citation, and a stored conversion version. Otherwise, display incompatible units separately. No mass conversion is authorised or required for this scope.
 
 ## KPI definitions
 
-For a complete month `m`, define `S_m` as the sum of EPPO source rates, `P_m` as mapped pipeline imports, `L_m` as the EPPO LNG rate, `I_m = P_m + L_m`, and `C_m` as the sum of the four consumption sectors. All rates below are MMSCFD. Supply mappings and source completeness must be approved before publishing import dependence.
+For a complete month `m`, define `S_m` as the sum of EPPO source rates, `P_m` as mapped pipeline imports, `L_m` as the EPPO LNG rate, `I_m = P_m + L_m`, and `C_m` as the sum of the four consumption sectors. All rates below are EPPO-reported MMSCFD, retaining its measurement qualifications. The source grouping is evidenced by the workbooks; snapshot consistency, source completeness, and reconciliation must still pass acceptance checks before publishing import dependence. Computed source sums and independently published rounded subtotals may differ; keep them distinguishable.
 
 | KPI | Definition | Display / interpretation |
 | --- | --- | --- |
 | Total reported supply | `S_m` | MMSCFD; includes JDA and OTHERS once |
+| Domestic supply—EPPO classification, including JDA | Sum of the explicitly mapped domestic-source rates, including JDA and OTHERS | MMSCFD; statistical grouping, not a sovereign ownership claim; no invented field breakdown |
 | Imported supply | `I_m` | MMSCFD; not an extra row added to source totals |
 | Import dependence | `100 × I_m / S_m` | % of total reported supply |
 | LNG / pipeline share of total supply | `100 × L_m / S_m`; `100 × P_m / S_m` | %; these sum to import dependence, not 100% |
@@ -78,8 +95,8 @@ Supply and consumption may differ because of statistical boundaries, processing,
 | ID | Pass condition |
 | --- | --- |
 | AC1 — Traceability | Every included series links to a verified official resource and a dated, hashed raw snapshot. Raw files remain under ignored `data/raw/`; no raw source rows, secrets, or environments are staged. |
-| AC2 — Coverage | The baseline contains 132 unique months from 2015-01 to 2025-12 in both core facts, four sectors per month (528 sector rows), and no duplicate month/category/unit keys. Any later change to coverage is explicit. |
-| AC3 — Classification | Every supply name has a reviewed mapping or an explicit unresolved label; JDA and OTHERS have documented treatment. Validate aggregate boundaries against an official reference before publishing domestic-only supply or import dependence. No unresolved material source is silently defaulted to domestic. |
+| AC2 — Coverage | The reporting window contains exactly 132 unique months from 2015-01 to 2025-12 in both core facts, four sectors per month (528 sector rows), and no duplicate month/category/unit keys. Supporting 2014 history is excluded from displayed-period totals. No 2026 or DMF series enters first-release reporting. Any later change to scope is explicit. |
+| AC3 — Classification | Every supply name matches the documented workbook grouping or is explicitly flagged for review. JDA and OTHERS remain visible within EPPO-defined domestic supply, and OTHERS has no invented field breakdown. Preserve workbook references and measurement qualifications; never silently classify new names as domestic. The grouping evidence is documented, but implementation and reconciliation are not yet verified. |
 | AC4 — Units | Only compatible source rates enter totals. Original `UNIT` is retained and checked. No mass/volume addition or undocumented LNG conversion occurs. DMF production's unit ambiguity blocks its integration. |
 | AC5 — Reconciliation | For January, June, and December 2025, manually check every displayed source and sector value against the downloaded CSV at published precision. Component sums and KPI formulas recompute correctly; displayed sector shares sum to 100% within 0.1 percentage point after rounding. |
 | AC6 — Import reference | For all 132 baseline months, calculated LNG share of imports differs from EPPO's reference by at most 0.1 percentage point; flag larger differences rather than overwrite values. This checks import mix, not the total-supply denominator. |
