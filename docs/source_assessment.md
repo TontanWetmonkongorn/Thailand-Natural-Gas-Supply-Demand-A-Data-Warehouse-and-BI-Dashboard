@@ -173,3 +173,84 @@ The 11 November follow-up establishes EPPO's domestic/import grouping, including
 This scope decision does not extend the CSV cutoff, overwrite snapshots with workbook values, or approve deleting records. Step 2 is complete; the next separate step is to create a progress note from verified project evidence.
 
 If download access later fails, use a previously retained, dated snapshot and clearly label its cutoff; never fabricate missing observations or present 2026 as complete. No full pipeline, database, forecast, or dashboard has been built in this assessment.
+
+## Executable import-mix comparison qualification — 18 November 2026
+
+The earlier statement that calculated import shares agree throughout the baseline
+must be qualified: the strict comparison now requires an explicit E1 observation
+for each of LNG, YADANA, YETAKUN and ZAWTIKA before calculating a month. Under
+this rule, 129 of 132 baseline months compare within 0.1 percentage point. April,
+May and June 2021 have no YETAKUN record in the retained supply CSV; the other
+three mapped import-source records and E3 reference values exist. These three
+months are REVIEW/unavailable, not PASS or reported zero. No absent record was
+filled, and agreement in other months does not establish that absent means zero.
+The prior assessment did not establish explicit component presence for all months;
+its broader numerical claim is not full AC6 acceptance evidence.
+
+Resolve the missing-record meaning using official source evidence before clearing
+these months. Do not infer inactivity or correct the raw CSV. The ignored report
+`outputs/validation/import_share_comparison.json` records source hashes, original
+record locators, differences and unavailable results. This comparison concerns
+import mix, not total national supply completeness or import dependence.
+
+## YETAKUN missing-record investigation — 18 November 2026
+
+### Verified EPPO workbook observations
+
+The retained [historical monthly Table 3.1-1M](https://www.eppo.go.th/wp-content/uploads/2026/04/T03_01_01-1.xls)
+was inspected directly using xlrd 2.0.2 loaded from a temporary wheel. Nothing
+was installed in the project environment. Its SHA-256 still matches
+`8b92ace2060438f3b84d6b80fce7b51edd3d2e34f5fcb781f937bddc21795cc0`.
+In sheet `tab38c`, row 498 establishes year 2021, R6 is the Yetakun heading,
+and row 3 states MMSCFD. These are original cell values, not imputed examples:
+
+| Month | Retained E1 CSV | Workbook cell | Workbook value | Interpretation supported by this evidence |
+| --- | --- | --- | --- | --- |
+| 2021-04 | No YETAKUN record | R502 | Numeric `0` | The EPPO workbook explicitly reports zero for this month. The CSV omits the corresponding observation. |
+| 2021-05 | No YETAKUN record | R503 | Empty cell | Missing in both forms; no numerical value established by this cell. |
+| 2021-06 | No YETAKUN record | R504 | Empty cell | Missing in both forms; no numerical value established by this cell. |
+
+The workbook does not provide an inspected blank-means-zero legend. It also
+contains both blank cells and numeric zero cells elsewhere. Do not collapse
+those representations or derive an exact missing component from independently
+rounded subtotal arithmetic. The workbook is a separate snapshot: an April
+supplement would require an explicit, versioned source-resolution rule, not
+an edit to the original CSV or a global zero-fill policy.
+
+### Verified operational context, distinct from monthly import measurements
+
+[PETRONAS' release of 2 April 2021](https://www.petronas.com/bm/node/587)
+states that the operator declared force majeure on 1 April after gas production
+fell below the processing plant's technical threshold, and temporarily ceased
+production until further notice. Force majeure here is the operator's declared
+exceptional event, not a numeric data value.
+
+[PTTEP's Q1 2021 Thai MD&A, page 10](https://market.sec.or.th/public/idisc/Views/Download?FILEID=dat%2Fnews%2F202104%2F21047190.pdf)
+also reports a temporary shutdown beginning 1 April 2564 (2021), because gas
+production was insufficient for minimum plant operation. The Thai phrase
+`หยุดการผลิตชั่วคราว` means “temporarily stopped production.” The document was
+read through the web PDF tool; a separate local download returned HTTP 403, so
+no retained local PDF or PDF hash is claimed.
+
+These primary statements support a shutdown explanation starting in April.
+They do not establish EPPO's blank-cell convention, an exact Thailand import
+rate for May/June, or a verified restart date in this investigation. Production
+at a field and a country's monthly reported import rate are different measures.
+Continuous cessation throughout May/June remains an inference from the start
+notice, not a verified month-by-month measurement here.
+
+### Current decision and next action
+
+Keep all three CSV-based comparisons at REVIEW. April now has explicit
+corroborating zero evidence in another EPPO snapshot; May and June still lack
+numeric observations or a verified missing-value convention. No raw records,
+comparison formulas, or applicability decisions were changed. A later bounded
+resolution task may add an explicitly labelled April workbook supplement, while
+retaining unresolved May/June, or obtain further official monthly evidence.
+Do not claim all 132 months satisfy AC6 yet.
+
+The PETRONAS HTML snapshot and an actual-time retrieval/inspection manifest are
+under ignored `data/raw/source_assessment/yetagun_review_20261118/`. The manifest
+records its SHA-256 and the verified workbook cell types/locators, and explicitly
+records the failed local PDF download. The historic workbook's original
+retrieval time is not reconstructed from this inspection time.
