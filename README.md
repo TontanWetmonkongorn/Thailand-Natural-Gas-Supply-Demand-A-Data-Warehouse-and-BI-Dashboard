@@ -1,6 +1,6 @@
 # Thailand Natural Gas Supply & Demand: A Data Warehouse and BI Dashboard
 
-An independent portfolio project for a PTT data analyst internship, using official public Thai energy statistics. It is not an official PTT product.
+An independent data analytics portfolio project using official public Thai energy statistics.
 
 This project turns monthly EPPO statistics into a DuckDB warehouse and a four-page Power BI report covering January 2015 through December 2025. It preserves original CSV snapshots, validates and converts observations to typed Parquet, loads fact and dimension tables, and exports Gold reporting views. The warehouse retains 2014 as comparison history.
 

@@ -2,7 +2,7 @@
 
 Last reviewed: **18 November 2026 (Asia/Bangkok)**.
 
-This is the current handoff note for Thailand Natural Gas Supply & Demand: A Data Warehouse and BI Dashboard, an independent internship portfolio project. Update it after each completed step using files, commits, or recorded checks as evidence. Plans and acceptance criteria are not completed implementation.
+This is the current handoff note for Thailand Natural Gas Supply & Demand: A Data Warehouse and BI Dashboard, an independent data analytics portfolio project. Update it after each completed step using files, commits, or recorded checks as evidence. Plans and acceptance criteria are not completed implementation.
 
 ## Goal and selected scope
 

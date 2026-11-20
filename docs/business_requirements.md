@@ -1,6 +1,6 @@
 # Thailand Natural Gas Supply & Demand: A Data Warehouse and BI Dashboard
 
-Status: requirements in development, initially assessed 10 November 2026; source-classification evidence and first-release scope updated 11 November 2026 (Asia/Bangkok). The reporting scope below is selected; implementation and acceptance checks remain pending. This is an independent internship portfolio project, not an official PTT publication. The repository is named Thailand-Natural-Gas-Supply-Demand-A-Data-Warehouse-and-BI-Dashboard; the existing Python setup is retained.
+Status: requirements in development, initially assessed 10 November 2026; source-classification evidence and first-release scope updated 11 November 2026 (Asia/Bangkok). The reporting scope below is selected; implementation and acceptance checks remain pending. This is an independent data analytics portfolio project. The repository is named Thailand-Natural-Gas-Supply-Demand-A-Data-Warehouse-and-BI-Dashboard; the existing Python setup is retained.
 
 ## Purpose and users
 
