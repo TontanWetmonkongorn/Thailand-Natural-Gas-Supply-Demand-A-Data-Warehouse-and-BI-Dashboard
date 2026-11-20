@@ -315,3 +315,75 @@ On a second computer, pull the checkpoint to resume the design exercise. To run
 the pipeline, recreate the environment from requirements.txt, copy the three
 exact EPPO CSV snapshots to data/raw/source_assessment/, and regenerate the
 Silver Parquet files using the README commands.
+
+## First DuckDB schema increment — 19 November 2026
+
+Run `.venv/bin/python src/gas_pipeline/init_warehouse.py` to create the local
+warehouse at `data/warehouse/thailand_gas.duckdb`. The SQL in
+`sql/create_sector_dimension.sql` defines the empty sector and definition
+version tables. Two initializer runs succeeded. A read-only reopen confirmed
+both tables, and in-memory checks confirmed version-scoped uniqueness and the
+foreign key. The database file is ignored by Git.
+
+Next, record a definition version and populate the four EPPO sectors.
+
+## DuckDB structural load checkpoint
+
+All five dimensions, three facts, and core provenance/quality tables are
+implemented in the DuckDB loader. The verified local checkpoint is
+`data/warehouse/checkpoint.duckdb`. See [warehouse checkpoint](warehouse_checkpoint.md)
+for the SQL walkthrough, load counts, and reproduction command. The original
+manual warehouse was locked by a Python session at the initial load attempt.
+Gold KPI views, release gates and the dashboard remain ahead.
+
+## First Gold view — monthly sector consumption
+
+Created `gold.monthly_sector_consumption` in the local checkpoint database
+using consumption load 2. All 528 reporting rows matched the selected Silver
+Parquet, including the four January 2025 rows. All 26 existing tests passed.
+The SQL and reproduction command are in the warehouse checkpoint documentation.
+
+## Gold consumption totals and sector shares
+
+Added and verified `gold.monthly_consumption_totals` and
+`gold.monthly_consumption_sector_shares` in the checkpoint database. Reconciled
+132 totals and 528 shares and tested incomplete sectors and zero denominators.
+January 2025 totals 4,156 MMSCFD. The existing Gold creation command installs
+all three consumption views. See the warehouse checkpoint for conventions.
+
+## Gold supply by source
+
+Created `gold.monthly_supply_by_source` in the checkpoint using supply load 1.
+Verified all 2,277 reporting rows and review flags against Silver. Reopening the
+database confirmed 132 months, unresolved source completeness throughout, and
+import-mix REVIEW for April–June 2021. All 26 existing tests passed. Supply totals
+and import dependence still require source applicability and reconciliation.
+
+## Gold published import mix
+
+Created `gold.monthly_published_import_mix` in the checkpoint using E3 load 3.
+Verified all 264 reporting rows against Silver. The percentages describe the
+share of imports by LNG and Myanmar pipeline gas. Import dependence and
+supply-derived reconciliation remain separate. All 26 existing tests passed.
+
+## Power BI export checkpoint
+
+Exported five Gold views to a versioned folder under ignored
+`outputs/power_bi/`. Verified CSV counts and hashes and the supply review flags.
+All 26 existing tests passed. Next is importing the CSVs into Power BI Desktop.
+
+## Power BI portfolio checkpoint
+
+The local report has Overview, Consumption, Supply, and Import Mix pages.
+The current Windows file is `C:\Users\Admin\GasBI_Checked\Thailand Gas.pbip`.
+The export manifest and expected Overview KPI values have been checked against
+the CSVs. See the [release check](warehouse_checkpoint.md#power-bi-release-check)
+for the remaining Desktop checks and what can be shared. No report was published.
+
+## Portfolio package checkpoint
+
+Power BI Desktop saved a standalone portfolio copy as
+`C:\Users\Admin\GasBI_Checked\Thailand Gas Portfolio.pbix`. The editable PBIP
+project is in the same directory. The README now describes the four report pages,
+verified December 2025 headline figures and outstanding scope limitations.
+Report files and generated exports remain local. Public sharing is pending.

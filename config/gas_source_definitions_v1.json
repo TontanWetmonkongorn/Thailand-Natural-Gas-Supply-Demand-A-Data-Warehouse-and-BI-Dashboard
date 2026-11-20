@@ -1,0 +1,13 @@
+{
+  "version_label": "gas-source-definitions-v1",
+  "review_state": "DRAFT",
+  "groups": {
+    "DOMESTIC_EPPO": ["ERAWAN", "BONGKOT", "BONGKOT TAI", "PAILIN", "ARTHIT", "TANTAWAN", "PHU HORM", "SIRIKIT", "LANTA", "NAM PHONG", "JASMINE", "YOONG THONG", "JDA", "OTHERS"],
+    "MYANMAR_IMPORT": ["YADANA", "YETAKUN", "ZAWTIKA"],
+    "LNG_IMPORT": ["LNG"]
+  },
+  "notes": {
+    "JDA": "Joint Development Area, grouped under EPPO domestic production.",
+    "OTHERS": "EPPO domestic aggregate. Individual source breakdown is unavailable."
+  }
+}

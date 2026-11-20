@@ -1,0 +1,16 @@
+{
+  "version_label": "import-category-definitions-v1",
+  "review_state": "DRAFT",
+  "categories": [
+    {
+      "code": "LNG",
+      "name": "LNG imports",
+      "denominator_description": "Total natural gas imports"
+    },
+    {
+      "code": "MYANMAR",
+      "name": "Pipeline gas imports from Myanmar",
+      "denominator_description": "Total natural gas imports"
+    }
+  ]
+}

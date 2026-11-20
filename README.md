@@ -2,7 +2,19 @@
 
 An independent portfolio project for a PTT data analyst internship, using official public Thai energy statistics. It is not an official PTT product.
 
-Requirements, source assessment, and the warehouse design draft are documented. The design review is complete, and the next task is the first pipeline increment: inspecting one retained EPPO supply CSV and producing a validation report. The first-release scope is monthly national supply trends, import dependence, and consumption by sector from January 2015 through December 2025 (132 months), using EPPO data. EPPO import-share data supports validation. Partial-year 2026 reporting and DMF integration are deferred to later releases. No warehouse pipeline or dashboard has been built yet.
+This project turns monthly EPPO statistics into a DuckDB warehouse and a four-page Power BI report covering January 2015 through December 2025. It preserves original CSV snapshots, validates and converts observations to typed Parquet, loads fact and dimension tables, and exports Gold reporting views. The warehouse retains 2014 as comparison history.
+
+| Report page | What it shows |
+| --- | --- |
+| Overview | December 2025 highlights and monthly trends |
+| Consumption | Sector rates, reported totals and shares |
+| Supply | Available reported rates by source and supply group, with coverage notes |
+| Import Mix | EPPO's published LNG and Myanmar pipeline shares of total imports |
+
+In December 2025, reported sector consumption was **4,304 MMSCFD**, the reported LNG supply rate was **1,059 MMSCFD**, and LNG accounted for **75.64% of imports**. National supply completeness remains unresolved, so import dependence is pending. The dashboard covers the available EPPO observations for the selected period. Partial-year 2026 reporting and DMF integration are deferred.
+![Power BI overview showing December 2025 KPIs and monthly trends](docs/images/power-bi-overview.png)
+
+[Consumption page preview](docs/images/power-bi-consumption.png) · [Import Mix page preview](docs/images/power-bi-import-mix.png)
 
 - [Business requirements, KPI definitions, and acceptance criteria](docs/business_requirements.md)
 - [Verified sources, observed coverage, and feasibility recommendation](docs/source_assessment.md)
@@ -10,7 +22,9 @@ Requirements, source assessment, and the warehouse design draft are documented. 
 - [Warehouse design explained in small steps](docs/warehouse_design.md)
 - [Progress, verification evidence, unresolved questions, and next step](docs/PROGRESS.md)
 
-The Python, SQL, and Jupyter environment is ready for source exploration and the later warehouse and dashboard work.
+- [Warehouse load, Gold views, and Power BI release checks](docs/warehouse_checkpoint.md)
+
+The report is available as a local Power BI Desktop file. The repository contains the code and documentation used to reproduce the underlying exports.
 
 ## Setup
 

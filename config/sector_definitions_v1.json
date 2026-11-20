@@ -1,0 +1,10 @@
+{
+  "version_label": "sector-definitions-v1",
+  "review_state": "DRAFT",
+  "sectors": [
+    {"code": "ELECTRICITY", "name": "Electricity"},
+    {"code": "GSP", "name": "Gas separation plants", "note": "Includes processing use"},
+    {"code": "INDUSTRY", "name": "Industry"},
+    {"code": "NGV", "name": "Natural gas for vehicles"}
+  ]
+}
