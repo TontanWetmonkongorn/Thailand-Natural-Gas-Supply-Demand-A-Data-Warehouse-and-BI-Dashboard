@@ -16,6 +16,17 @@ In December 2025, reported sector consumption was **4,304 MMSCFD**, the reported
 
 [Consumption page preview](docs/images/power-bi-consumption.png) · [Import Mix page preview](docs/images/power-bi-import-mix.png)
 
+## Key Findings
+
+| Business question | Answer | Report page |
+| --- | --- | --- |
+| How did reported gas supply change? | Between January 2015 and December 2025, the reported LNG rate rose from **145 to 1,059 MMSCFD**, while Erawan fell from **1,281 to 861 MMSCFD**. These are two endpoint observations for individual sources. | Supply |
+| Which sector accounted for the most reported consumption? | Electricity led in December 2025 with **2,566 MMSCFD**, or **59.62%** of the reported total of **4,304 MMSCFD**. Gas separation plants were second at **919 MMSCFD**, including processing use. | Consumption |
+| How did Thailand's import mix change? | LNG accounted for **13.73%** of imports in January 2015 and **75.64%** in December 2025, a rise of **61.91 percentage points** between those months. Myanmar pipeline gas accounted for the other **24.36%** in December 2025. | Import Mix |
+| How dependent is Thailand on imported gas? | Still unresolved. Import dependence requires a verified total national supply denominator. The published import-mix figures use total imports as their denominator. | Overview coverage note |
+
+MMSCFD means million standard cubic feet per day. The figures are from the EPPO snapshots used in the report. See the [source assessment](docs/source_assessment.md) for definitions and coverage.
+
 - [Business requirements, KPI definitions, and acceptance criteria](docs/business_requirements.md)
 - [Verified sources, observed coverage, and feasibility recommendation](docs/source_assessment.md)
 - [Cleaning rules, quality decisions, and validation tolerances](docs/data_quality_rules.md)
